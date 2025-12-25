@@ -1,39 +1,39 @@
 import React from 'react';
+
+// Import Components
 import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
+import VideoStage from '../components/VideoStage';
+import ControlPanel from '../components/ControlPanel';
+import ChatLog from '../components/ChatLog';
 
 const MainChat = () => {
   return (
-    <div>
+    <div className="flex flex-col h-screen bg-white font-sans text-gray-900">
+      
+      {/* 1. Navbar (Fixed at Top) */}
       <Navbar page="chat" />
-      <div style={{ display: 'flex', height: '90vh' }}>
+
+      {/* 2. Main Workspace */}
+      {/* CHANGE: Added 'pt-20' to push content down below the fixed Navbar */}
+      <div className="flex flex-1 overflow-hidden pt-20">
         
-        {/* Left Side: Chat History */}
-        <div style={{ width: '20%', background: '#f0f0f0', padding: '10px' }}>
-          <h3>Chat History</h3>
-          <p>[List of previous sessions]</p>
-        </div>
+        {/* A. Sidebar (Left) */}
+        <Sidebar />
 
-        {/* Right Side: Workspace */}
-        <div style={{ width: '80%', padding: '10px' }}>
+        {/* B. Content Area (Right) */}
+        <div className="flex-1 flex flex-col relative h-full">
           
-          {/* Visual Area */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', height: '300px', background: '#e0e0e0', marginBottom: '10px' }}>
-             <div style={{ width: '48%', background: 'black', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                [User Webcam Input Area]
-             </div>
-             <div style={{ width: '48%', background: 'gray', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                [Avatar Animation Output]
-             </div>
-          </div>
+          {/* Tool Header */}
+          
 
-          {/* Controls */}
-          <div style={{ marginBottom: '10px' }}>
-             <button>Start Input</button> <button>Pause</button> <button>Enter (Send)</button> <button>Retake</button> <button>Close Session</button>
-          </div>
-
-          {/* Text Chat Area */}
-          <div style={{ border: '1px solid #ccc', padding: '10px', height: '150px' }}>
-             <p>[Chat Text Log will appear here]</p>
+          {/* Scrollable Content */}
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50/50">
+            <div className="max-w-5xl mx-auto flex flex-col h-full">
+              <VideoStage />
+              <ControlPanel />
+              <ChatLog />
+            </div>
           </div>
 
         </div>
