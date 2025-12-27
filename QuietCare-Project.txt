@@ -1,47 +1,47 @@
 QuietCare-Project/
-├── backend/              # (Server Side Code)
-│   ├── .env              # (Secrets: Mongo URI, JWT Secret, Email Pass)
-│   ├── package.json      # (Backend dependencies: express, mongoose, etc.)
-│   ├── server.js         # (Main Entry Point: Runs on Port 5000)
-│   ├── models/           # (Database Schemas)
-│   │   ├── User.js       # (Stores Name, Email, Password)
-│   │   └── Chat.js       # (Stores Chat History)
-│   ├── routes/           # (API Endpoints)
-│   │   ├── auth.js       # (Login, Signup, Forgot Password routes)
-│   │   └── chat.js       # (Save/Get Chat History routes)
-│   └── controllers/      # (Logic for Routes)
-│       └── authController.js
 │
-└── client/
-	├── index.html            # (Main HTML file)
-	├── vite.config.js        # (Vite Settings)	
-	├── tailwind.config.js    # (Tailwind Settings)
-	├── package.json          # (Frontend dependencies: react, redux, 	lucide, etc.)
-	└── src/
-  	  ├── main.jsx          # (React Entry Point)
-  	  ├── App.jsx           # (Router: Defines /signin, /chat paths)
-  	  ├── index.css         # (Tailwind imports)
-  	  │
-    	├── app/              # (Redux Store Setup)
-   	 │   └── store.js      # (Configures the global store)
-   	 │
-   	 ├── features/         # (Redux Slices)
-    	│   └── auth/
-    	│       └── authSlice.js  # (Handles Login/Logout & LocalStorage)
-    	│
-    	├── components/       # (Reusable UI parts)
-    	│   ├── Navbar.jsx       # (Global Top Bar - Smart "Log In" vs "Profile")
-    	│   ├── Sidebar.jsx      # (Chat History + Fixed "New Session" button)
-    	│   ├── VideoStage.jsx   # (Split View: Webcam + Avatar)
-    	│   ├── ControlPanel.jsx # (Buttons: Start, Pause, Enter)
-    	│   └── ChatLog.jsx      # (Text Conversation Box)
-    	│
-    	└── pages/            # (Full Page Views)
-       		├── Home.jsx           # (Landing Page with Marquee)
-        	├── SignIn.jsx         # (Login Page)
-        	├── SignUp.jsx         # (Registration Page)
-        	├── ForgotPassword.jsx # (Email Input)
-        	├── ResetPassword.jsx  # (New Password Input)
-        	└── MainChat.jsx       # (The "Tool": Combines all components above)
-
-
+├── backend/                  # 🟢 SERVER A: The Manager (Node.js)
+│   ├── .env                  # (Secrets: Mongo URI, JWT Secret)
+│   ├── package.json          # (Dependencies: express, mongoose, bcrypt)
+│   ├── server.js             # (Runs on Port 5000)
+│   ├── models/               # (Database Schemas)
+│   │   ├── User.js           # (Users)
+│   │   └── Chat.js           # (History)
+│   ├── routes/               # (API Routes)
+│   │   ├── auth.js           # (Login/Signup)
+│   │   └── chat.js           # (Save History)
+│   └── controllers/          # (Logic)
+│
+├── client/                   # 🔵 FRONTEND: The Interface (React)
+│   ├── vite.config.js        # (Vite Config)
+│   ├── tailwind.config.js    # (Styling Config)
+│   ├── package.json          # (Dependencies: axios, lucide-react)
+│   └── src/
+│       ├── main.jsx          # (Entry Point)
+│       ├── App.jsx           # (Router)
+│       ├── features/         # (Redux State)
+│       │   └── auth/authSlice.js
+│       ├── components/       # (UI Blocks)
+│       │   ├── Navbar.jsx
+│       │   ├── Sidebar.jsx
+│       │   ├── VideoStage.jsx   # (CRITICAL: Handshake Loop for AI)
+│       │   ├── ControlPanel.jsx # (Start/Pause Buttons)
+│       │   └── ChatLog.jsx      # (Chat Display)
+│       └── pages/            # (Full Pages)
+│           ├── Home.jsx
+│           ├── SignIn.jsx
+│           ├── SignUp.jsx
+│           ├── ForgotPassword.jsx
+│           └── MainChat.jsx     # (The Tool Controller)
+│
+└── ai_engine/                # 🟠 SERVER B: The Brain (Python)
+    ├── venv/                 # (Python Virtual Environment)
+    ├── main.py               # (FastAPI Server: Runs on Port 8000)
+    ├── predictor.py          # (CRITICAL: MediaPipe + Speed Correction Logic)
+    ├── translator.py         # (BART Model: Gloss -> English)
+    └── models/               # (Your Trained AI Files)
+        ├── final_model_all1.pth
+        ├── mean_std.npz
+        ├── labels.txt
+        ├── Glossa-BART-Model/      # (Folder)
+        └── Glossa-BART-Tokenizer/  # (Folder)
